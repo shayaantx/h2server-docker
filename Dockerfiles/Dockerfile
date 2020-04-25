@@ -31,7 +31,6 @@ RUN wine regedit h2server.reg
 ADD createServerConfig.sh .
 ADD h2serverconfig.ini.template .
 RUN chmod 755 createServerConfig.sh
-ARG wan_ip
 RUN ./createServerConfig.sh "$wan_ip" "$lan_ip" "$enable_xdelay" "$debug_log" "$debug_log_level" "$debug_log_console" "$server_name" "$server_playlist" "$pcr_time" "$username" "$password"
 RUN mkdir /home/config
 RUN cat h2serverconfig.ini
