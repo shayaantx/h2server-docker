@@ -35,4 +35,4 @@ RUN ./createServerConfig.sh "$wan_ip" "$lan_ip" "$enable_xdelay" "$debug_log" "$
 RUN mkdir /home/config
 RUN mv h2serverconfig.ini /home/config/
 
-CMD ["wine", "/home/h2server/h2server.exe", "-live", "-h2config=/home/config/h2serverconfig.ini"]
+ENTRYPOINT ["wine", "/home/h2server/h2server.exe", "-live", "-h2config=/home/config/h2serverconfig.ini"]
