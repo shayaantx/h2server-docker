@@ -29,9 +29,9 @@ RUN wine regedit h2server.reg
 
 # Build h2server config file
 ADD createServerConfig.sh .
-ADD h2serverconfig.ini.template
+ADD h2serverconfig.ini.template .
 RUN chmod 755 createServerConfig.sh
 RUN ./createServerConfig.sh "$wan_ip" "$lan_ip" "$enable_xdelay" "$debug_log" "$debug_log_level" "$debug_log_console" "$server_name" "$server_playlist" "$pcr_time" "$username" "$password"
-ADD h2serverconfig.ini /home/config/
+RUN mv h2serverconfig.ini /home/config/
 
 CMD ["wine", "/home/h2server/h2server.exe", "-live", "-h2config=/home/config/h2serverconfig.ini"]
