@@ -22,5 +22,5 @@ services:
     volumes:
       - "${H2SERVER1_LOGS_DIRECTORY}:/home/wineuser/.wine/drive_c/users/wineuser/Local Settings/Application Data/Microsoft/Halo 2/logs/H2Server/instance1"
     extends:
-      file: common.yml
+      file: docker-common.yml
       service: h2server
