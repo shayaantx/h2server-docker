@@ -1,4 +1,4 @@
-version: '3'
+version: '2'
 
 services:
   h2server1:
@@ -8,11 +8,19 @@ services:
       args:
         description: "${H2SERVER1_DESCRIPTION}"
         owner: "${H2SERVER1_OWNER}"
+        udp_port_range: "${H2SERVER1_UDP_PORT_RANGE}"
+        tcp_port: "${H2SERVER1_TCP_PORT}"
+        logs_directory: "${H2SERVER1_LOGS_DIRECTORY}"
+        enable_xdelay: "${H2SERVER1_ENABLE_XDELAY}"
+        server_name: "${H2SERVER1_SERVER_NAME}"
+        server_playlist: "${H2SERVER1_SERVER_PLAYLIST}"
+        username: "${H2SERVER1_USERNAME}"
+        password: "${H2SERVER1_PASSWORD}"
     ports:
       - "${H2SERVER1_UDP_PORT_RANGE}:10000-10009/udp"
       - "${H2SERVER1_TCP_PORT}:10010/tcp"
     volumes:
-      - "${PLAYLISTS_DIRECTORY}:/home/wineuser/.wine/drive_c/users/wineuser/My Documents/My Games/Halo 2/Server"
-      - "${H2SERVER_BINARIES}:/home/h2server"
       - "${H2SERVER1_LOGS_DIRECTORY}:/home/wineuser/.wine/drive_c/users/wineuser/Local Settings/Application Data/Microsoft/Halo 2/logs/H2Server/instance1"
-    restart: always
+    extends:
+      file: common.yml
+      service: h2server

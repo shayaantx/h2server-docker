@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+  h2server:
+    build:
+      context: ./Dockerfiles
+      dockerfile: Dockerfile
+      args:
+        wan_ip: "${H2SERVER_WAN_IP}"
+        lan_ip: "${H2SERVER_LAN_IP}"
+        debug_log: "${H2SERVER_DEBUG_LOG}"
+        debug_log_level: "${H2SERVER_DEBUG_LOG_LEVEL}"
+        debug_log_console: "${H2SERVER_DEBUG_LOG_CONSOLE}"
+        pcr_time: "${H2SERVER_PCR_TIME}"
+    volumes:
+      - "${H2SERVER_PLAYLISTS_DIRECTORY}:/home/wineuser/.wine/drive_c/users/wineuser/My Documents/My Games/Halo 2/Server"
+      - "${H2SERVER_BINARIES}:/home/h2server"
+    restart: always
