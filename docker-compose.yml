@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  h2server1:
+    build:
+      context: ./Dockerfiles
+      dockerfile: Dockerfile
+      args:
+        description: "${H2SERVER1_DESCRIPTION}"
+        owner: "${H2SERVER1_OWNER}"
+    ports:
+      - "${H2SERVER1_UDP_PORT_RANGE}:10000-10009/udp"
+      - "${H2SERVER1_TCP_PORT}:10010/tcp"
+    volumes:
+      - "${PLAYLISTS_DIRECTORY}:/home/wineuser/.wine/drive_c/users/wineuser/My Documents/My Games/Halo 2/Server"
+      - "${H2SERVER_BINARIES}:/home/h2server"
+      - "${H2SERVER1_LOGS_DIRECTORY}:/home/wineuser/.wine/drive_c/users/wineuser/Local Settings/Application Data/Microsoft/Halo 2/logs/H2Server/instance1"
+    restart: always

@@ -1,0 +1,71 @@
+#--- Halo 2 Project Cartographer Configuration File ---
+
+# h2portable Options:
+# 0 - Config files are read from executable's launch directory then AppDataLocal if missing. Will write to AppDataLocal if not read from the execution directory.
+# 1 - All config files are read and written to the executable's launch directory (however will still scan and read from AppDataLocal if missing).
+
+# base_port Options:
+# <1 - 65526> - The port the game binds to including any of the nine (9) afterward: UDP and/or TCP (Upper limit: 65535 - 9 = 65526).
+
+# wan_ip Options:
+# lan_ip Options:
+# This option is used for when you cannot join games hosted on the same local network due to NAT issues.
+# Configuring these settings for an internal network address avoids the requirement for that host user to port forward.
+# <IPv4> - External IP Address of the local / internal network user you are trying to connect to. If blank, the External IP returned from the Master Login is used.
+# <IPv4> - Internal IP Address of the local / internal network user you are trying to connect to.
+
+# enable_xdelay Options:
+# 0 - Non-host players cannot delay the game start countdown timer.
+# 1 - Non-host players can delay the game start countdown timer (native default).
+
+# debug_log Options:
+# 0 - Disables logging.
+# 1 - Enables logging.
+
+# debug_log_level Options:
+# 0 - Trace, tell me *everything*.
+# 1 - Debug, give me the dirty details.
+# 2 - Info, occasionally helpful information.
+# 3 - Warning, what probably shouldn't be happening.
+# 4 - Error, bad news only, please.
+# 5 - Critical, I only want to see death and destruction.
+
+# debug_log_console Options:
+# 0 - Disables console window logging.
+# 1 - Enables console window logging, will display all output from all loggers.
+
+# server_name Options (Server):
+# Sets the name of the server up to 31 characters long.
+# Leave blank/empty for no effect.
+
+# server_playlist Options (Server):
+# Sets the playlist of the server up to 255 characters long.
+# Leave blank/empty for no effect.
+
+# login_identifier Options (Server):
+# The email or username used to login to an account.
+# Note: Server accounts *should not* be signed into multiple times concurrently *unless* it is all on the same computer (i.e. only exempt when running multiple server instances).
+
+# login_password Options (Server):
+# The password used to login to the defined account.
+
+# additional_pcr_time Options (Server):
+# By default, 25 seconds are added to post game carnage time from the playlist setting.
+# Now you have the possibility to change it to your preference.
+
+[H2ConfigurationVersion:1]
+h2portable = 0
+base_port = 10000
+wan_ip = ${1}
+lan_ip = ${2}
+enable_xdelay = ${3}
+debug_log = ${4}
+debug_log_level = ${5}
+debug_log_console = ${6}
+server_name = ${7}
+server_playlist = ${8}
+additional_pcr_time = ${9}
+login_identifier = ${10}
+login_password = ${11}
+
+

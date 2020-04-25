@@ -1,0 +1,11 @@
+[HKEY_CURRENT_USER\Software\Microsoft\Halo 2\Server\LIVE]
+"LIVE ID"="a"
+"Description"="${1}"
+"Owner"="${2}"
+"Privacy"="Open"
+"Enable Multiple Instances"=dword:00000000
+"Live Port Override"=dword:00000000
+
+[HKEY_CURRENT_USER\Software\Microsoft\Halo 2\Server\LIVE\Banned Gamers]
+
+[HKEY_CURRENT_USER\Software\Microsoft\Halo 2\Server\LIVE\VIPs]
