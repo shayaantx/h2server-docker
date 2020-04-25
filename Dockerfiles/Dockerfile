@@ -21,12 +21,14 @@ ARG username
 ARG password
 
 # Build h2server registry file
+ADD createRegistryFile.sh .
 RUN chmod 755 createRegistryFile.sh
 RUN ./createRegistryFile.sh "$description" "$owner"
 ADD h2server.reg .
 RUN wine regedit h2server.reg
 
 # Build h2server config file
+ADD createServerConfig.sh .
 RUN chmod 755 createServerConfig.sh
 RUN ./createServerConfig.sh "$wan_ip" "$lan_ip" "$enable_xdelay" "$debug_log" "$debug_log_level" "$debug_log_console" "$server_name" "$server_playlist" "$pcr_time" "$username" "$password"
 ADD h2serverconfig.ini /home/config/
