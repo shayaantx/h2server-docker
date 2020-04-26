@@ -38,4 +38,4 @@ RUN mv h2serverconfig.ini /home/config/
 ADD startup.sh .
 RUN chmod 755 startup.sh
 
-ENTRYPOINT ["startup.sh"]
+ENTRYPOINT ["./startup.sh"]
