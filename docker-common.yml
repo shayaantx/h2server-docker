@@ -16,3 +16,5 @@ services:
       - "${H2SERVER_PLAYLISTS_DIRECTORY}:/home/wineuser/.wine/drive_c/users/wineuser/My Documents/My Games/Halo 2/Server"
       - "${H2SERVER_BINARIES}:/home/h2server"
     restart: always
+    stdin_open: true
+    tty: true
