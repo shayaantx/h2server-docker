@@ -25,7 +25,6 @@ ADD createRegistryFile.sh .
 ADD h2server.reg.template .
 RUN chmod 755 createRegistryFile.sh
 RUN ./createRegistryFile.sh "$description" "$owner"
-RUN wine regedit h2server.reg
 
 # Build h2server config file
 ADD createServerConfig.sh .
