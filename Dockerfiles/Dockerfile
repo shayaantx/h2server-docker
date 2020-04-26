@@ -35,4 +35,7 @@ RUN ./createServerConfig.sh "$wan_ip" "$lan_ip" "$enable_xdelay" "$debug_log" "$
 RUN mkdir /home/config
 RUN mv h2serverconfig.ini /home/config/
 
-ENTRYPOINT ["wine", "/home/h2server/h2server.exe", "-live", "-h2config=/home/config/h2serverconfig.ini"]
+ADD startup.sh .
+RUN chmod 755 startup.sh
+
+ENTRYPOINT ["startup.sh"]
