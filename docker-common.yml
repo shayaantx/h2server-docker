@@ -13,7 +13,7 @@ services:
         debug_log_console: "${H2SERVER_DEBUG_LOG_CONSOLE}"
         pcr_time: "${H2SERVER_PCR_TIME}"
     volumes:
-      - "${H2SERVER_PLAYLISTS_DIRECTORY}:/home/wineuser/.wine/drive_c/users/wineuser/My Documents/My Games/Halo 2/Server"
+      - "${H2SERVER_PLAYLISTS_DIRECTORY}:/home/wineuser/.wine/drive_c/users/root/My Documents/My Games/Halo 2/Server"
       - "${H2SERVER_BINARIES}:/home/h2server"
     restart: always
     stdin_open: true
