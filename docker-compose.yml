@@ -20,7 +20,7 @@ services:
       - "${H2SERVER1_UDP_PORT_RANGE}:10000-10009/udp"
       - "${H2SERVER1_TCP_PORT}:10010/tcp"
     volumes:
-      - "${H2SERVER1_LOGS_DIRECTORY}:/home/wineuser/.wine/drive_c/users/wineuser/Local Settings/Application Data/Microsoft/Halo 2/logs/H2Server/instance1"
+      - "${H2SERVER1_LOGS_DIRECTORY}:/root/.wine/drive_c/users/root/Local Settings/Application Data/Microsoft/Halo 2/logs/H2Server/instance1"
     extends:
       file: docker-common.yml
       service: h2server
