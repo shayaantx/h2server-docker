@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Set the approriate registry settings
+# Set the approriate registry settings 
 wine regedit h2server.reg
 
 # Verify registry was set
