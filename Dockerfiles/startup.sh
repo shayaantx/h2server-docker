@@ -11,6 +11,9 @@ cat output.reg
 # you can use h2server with docker run, but the point of this setup is to run many servers via docker-compose
 screen -d -m wine /home/h2server/h2server.exe -live -h2config=/home/config/h2serverconfig.ini
 
+# since we run the server in screen, wait a bit before attempting to check if its up or not
+sleep 30
+    
 while true
 do
   if pgrep -x h2server.exe > /dev/null
