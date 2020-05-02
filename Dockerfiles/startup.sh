@@ -7,6 +7,5 @@ wine regedit h2server.reg
 wine regedit /E output.reg "HKEY_CURRENT_USER\Software\Microsoft\Halo 2\Server\LIVE"
 cat output.reg
 
-# Install the service
-wine /home/h2server/h2server.exe -createservice -live -instance:1 || true
-wine /home/h2server/h2server.exe -service -live -h2config=/home/config/h2serverconfig.ini
+screen -d -m wine /home/h2server/h2server.exe -live -h2config=/home/config/h2serverconfig.ini
+sleep infinity

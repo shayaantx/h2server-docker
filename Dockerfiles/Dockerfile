@@ -1,5 +1,8 @@
 FROM scottyhardy/docker-wine
 
+RUN apt-get update
+RUN apt-get install screen
+
 # Make general h2server docker-compose arguments available
 ARG wan_ip
 ARG lan_ip
