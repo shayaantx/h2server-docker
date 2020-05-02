@@ -13,12 +13,12 @@ screen -d -m wine /home/h2server/h2server.exe -live -h2config=/home/config/h2ser
 
 while true
 do
-  if pgrep -x h2server.exe >/dev/null
+  if pgrep -x h2server.exe > /dev/null
   then
+    sleep 10
+  else
     # if for any reason the serve stops, stop this entrypoint
     echo "service is not running"
     exit 1
-  else
-    sleep 10
   fi
 done
