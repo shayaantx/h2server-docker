@@ -10,10 +10,22 @@ h2ServerConfigKeys = {}
 h2ServerInstanceIds = []
 h2ServerInstancePattern	= re.compile("H2SERVER([0-9]+)")
 
-def mk_double_quote(dumper, data):
+# We have a special class for KeyValue types where we want double quotes surrounding the key AND value
+# docker-compose doesn't seem to treat double quotes on the key AND value separately as valid
+class KeyValueType:
+  def __init__(self, key, value):
+    self.key = key
+    self.value = value
+      
+def keyValueTypeRepresenter(dumper, data):
+  newKeyValue = data.key + ':' + data.value
+  return dumper.represent_scalar('tag:yaml.org,2002:str', newKeyValue, style='"')
+
+def doubleQuoteRepresenter(dumper, data):
   return dumper.represent_scalar('tag:yaml.org,2002:str', data, style='"')
 
-yaml.add_representer(str, mk_double_quote)
+yaml.add_representer(str, doubleQuoteRepresenter)
+yaml.add_representer(KeyValueType, keyValueTypeRepresenter)
 
 def getKeyAndValue(line):
   lineAndValueArr = line.split('=', 1)
@@ -49,27 +61,27 @@ def getH2ServerBlock(id):
   h2ServerPassword = validateValueAndGetKey(h2ServerUniqueStringPrefix + "PASSWORD")
 
   h2ServerArgs = [
-    {"description": variablize(h2ServerDescription)}, 
-    {"owner": variablize(h2ServerOwner)},
-    {"udp_port_range": variablize(h2ServerUdpPortRange)},
-    {"tcp_port": variablize(h2ServerTcpPort)},
-    {"logs_directory": variablize(h2ServerLogsDirectory)},
-    {"enable_xdelay": variablize(h2ServerEnableXDelay)},
-    {"server_name": variablize(h2ServerName)},
-    {"server_playlist": variablize(h2ServerPlaylist)},
-    {"username": variablize(h2ServerUsername)},
-    {"password": variablize(h2ServerPassword)}
+    KeyValueType("description", variablize(h2ServerDescription)),
+    KeyValueType("owner", variablize(h2ServerOwner)),
+    KeyValueType("udp_port_range", variablize(h2ServerUdpPortRange)),
+    KeyValueType("tcp_port", variablize(h2ServerTcpPort)),
+    KeyValueType("logs_directory", variablize(h2ServerLogsDirectory)),
+    KeyValueType("enable_xdelay", variablize(h2ServerEnableXDelay)),
+    KeyValueType("server_name", variablize(h2ServerName)),
+    KeyValueType("server_playlist", variablize(h2ServerPlaylist)),
+    KeyValueType("username", variablize(h2ServerUsername)),
+    KeyValueType("password", variablize(h2ServerPassword))
   ]
 
   h2ServerBuild = {"context": "./Dockerfiles", "dockerfile": "Dockerfile", "args": h2ServerArgs}
   return {
     h2ServerContainerName: {
-      "build": h2ServerBuild, 
+      "build": h2ServerBuild,
       "ports": [
-        {variablize(h2ServerUdpPortRange): variablize(h2ServerUdpPortRange) + "/udp"}, 
-        {variablize(h2ServerTcpPort): variablize(h2ServerTcpPort) + "/tcp"}
+        KeyValueType(variablize(h2ServerUdpPortRange), variablize(h2ServerUdpPortRange) + "/udp"),
+        KeyValueType(variablize(h2ServerTcpPort), variablize(h2ServerTcpPort) + "/tcp")
       ],
-      "volumes": [{variablize(h2ServerLogsDirectory): "/root/.wine/drive_c/users/root/Local Settings/Application Data/Microsoft/Halo 2/logs/H2Server/instance1"}],
+      "volumes": [KeyValueType(variablize(h2ServerLogsDirectory), "/root/.wine/drive_c/users/root/Local Settings/Application Data/Microsoft/Halo 2/logs/H2Server/instance1")],
       "extends": {"file": "docker-common.yml", "service": "h2server"}
     }
   }
@@ -111,5 +123,5 @@ h2ServerDictionary.update({"services": h2ServersDict})
 
 # write the yaml file out to disk
 with open(r'docker-compose.yml', 'w') as file:
-    documents = yaml.dump(h2ServerDictionary, file)
+    documents = yaml.dump(h2ServerDictionary, file, default_style=None, default_flow_style=False)
 
