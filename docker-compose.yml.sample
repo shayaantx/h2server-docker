@@ -16,7 +16,6 @@ services:
         server_playlist: "${H2SERVER1_SERVER_PLAYLIST}"
         username: "${H2SERVER1_USERNAME}"
         password: "${H2SERVER1_PASSWORD}"
-        port_range: "${H2SERVER1_UDP_PORT_RANGE}"
     ports:
       - "${H2SERVER1_UDP_PORT_RANGE}:${H2SERVER1_UDP_PORT_RANGE}/udp"
       - "${H2SERVER1_TCP_PORT}:${H2SERVER1_TCP_PORT}/tcp"
