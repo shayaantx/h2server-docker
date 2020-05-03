@@ -22,6 +22,7 @@ ARG server_name
 ARG server_playlist
 ARG username
 ARG password
+ARG port_range
 
 # Build h2server registry file
 ADD createRegistryFile.sh .
@@ -33,7 +34,7 @@ RUN ./createRegistryFile.sh "$description" "$owner"
 ADD createServerConfig.sh .
 ADD h2serverconfig.ini.template .
 RUN chmod 755 createServerConfig.sh
-RUN ./createServerConfig.sh "$wan_ip" "$lan_ip" "$enable_xdelay" "$debug_log" "$debug_log_level" "$debug_log_console" "$server_name" "$server_playlist" "$pcr_time" "$username" "$password"
+RUN ./createServerConfig.sh "$wan_ip" "$lan_ip" "$enable_xdelay" "$debug_log" "$debug_log_level" "$debug_log_console" "$server_name" "$server_playlist" "$pcr_time" "$username" "$password" "$port_range"
 RUN mkdir /home/config
 RUN mv h2serverconfig.ini /home/config/
 
