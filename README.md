@@ -50,7 +50,7 @@ This set of docker configurations enables someone to host halo2vista dedicated (
           description: "${H2SERVER2_DESCRIPTION}"
       ...
   ```
-  1. 
+  
 * ### Automated
   1. TODO
 
