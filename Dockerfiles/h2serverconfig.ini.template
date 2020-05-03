@@ -55,7 +55,7 @@
 
 [H2ConfigurationVersion:1]
 h2portable = 0
-base_port = 10000
+base_port = ${var12}
 wan_ip = ${var1}
 lan_ip = ${var2}
 enable_xdelay = ${var3}
