@@ -50,13 +50,26 @@ This set of docker configurations enables someone to host halo2vista dedicated (
           description: "${H2SERVER2_DESCRIPTION}"
       ...
   ```
-  
+
 * ### Automated
-  1. TODO
+  1. Unless you are used to docker, the yaml configuration might be overwhelming, so I made a shell/python script that reads the .env file and builds it for you
+  2. Make sure you have python installed and the following packages available in your python install: yaml, os, re
+  3. In the git workspace run ./build.sh
+  4. This will produce docker-compose.yml
+  5. You can run docker-compose config in the git workspace to validate the config is valid.
+  6. Every time you change the .env file, make sure to run ./build.sh to rebuild the file
 
 ## Usage
 
-TODO: docker-compose
+1. I've made a few scripts to assist users with starting and stopping containers (for the less docker friendly people)
+    * restart.sh
+    * stop.sh
+1. Both of these scripts basically call docker-compose up or docker-compose down
+1. If you want to connect to administer your h2server, follow below steps
+    1. docker ps
+    1. Get the container id
+    1. docker exec -it <container-id> screen -r
+    1. Don't ctrl+c or type exit, since that will exit the server, always end with Ctrl+a+d (we are running screen here due to some interactive shell annoyance with h2server.exe -live mode)    
 
 ## Other
 
