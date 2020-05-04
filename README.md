@@ -8,7 +8,7 @@ This set of docker configurations enables someone to host halo2vista dedicated (
 
 - Familarity using docker and docker-compose
 - Ability to open ports
-- Ability to linux based distributions
+- Ability to use linux based distributions
 - Ability to use git
 
 ## Setup
