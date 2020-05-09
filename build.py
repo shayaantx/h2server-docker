@@ -19,10 +19,6 @@ class BaseKeyValueType:
     self.value = value
 
 
-class BuildArgsKeyValueType(BaseKeyValueType):
-  pass
-
-
 class PortKeyValueType(BaseKeyValueType):
   pass
 
@@ -36,11 +32,6 @@ def doubleQuoteAroundKeyAndValueRepresenter(dumper, data):
   return dumper.represent_scalar('tag:yaml.org,2002:str', newKeyValue, style='"')
 
 
-def buildArgsKeyValueTypeRepresenter(dumper, data):
-  newKeyValue = data.key + ':"' + data.value + "\""
-  return dumper.represent_scalar('tag:yaml.org,2002:str', newKeyValue, style='')
-
-
 def generalStrKeyValueRepresenter(dumper, data):
   return dumper.represent_scalar('tag:yaml.org,2002:str', data, style='"')
 
@@ -48,7 +39,6 @@ def generalStrKeyValueRepresenter(dumper, data):
 yaml.add_representer(str, generalStrKeyValueRepresenter)
 yaml.add_representer(PortKeyValueType, doubleQuoteAroundKeyAndValueRepresenter)
 yaml.add_representer(VolumeKeyValueType, doubleQuoteAroundKeyAndValueRepresenter)
-yaml.add_representer(BuildArgsKeyValueType, buildArgsKeyValueTypeRepresenter)
 
 
 def getKeyAndValue(line):
@@ -88,18 +78,18 @@ def getH2ServerBlock(id):
   h2ServerUsername = validateValueAndGetKey(h2ServerUniqueStringPrefix + "USERNAME")
   h2ServerPassword = validateValueAndGetKey(h2ServerUniqueStringPrefix + "PASSWORD")
 
-  h2ServerArgs = [
-    BuildArgsKeyValueType("description", variablize(h2ServerDescription)),
-    BuildArgsKeyValueType("owner", variablize(h2ServerOwner)),
-    BuildArgsKeyValueType("udp_port_range", variablize(h2ServerUdpPortRange)),
-    BuildArgsKeyValueType("tcp_port", variablize(h2ServerTcpPort)),
-    BuildArgsKeyValueType("logs_directory", variablize(h2ServerLogsDirectory)),
-    BuildArgsKeyValueType("enable_xdelay", variablize(h2ServerEnableXDelay)),
-    BuildArgsKeyValueType("server_name", variablize(h2ServerName)),
-    BuildArgsKeyValueType("server_playlist", variablize(h2ServerPlaylist)),
-    BuildArgsKeyValueType("username", variablize(h2ServerUsername)),
-    BuildArgsKeyValueType("password", variablize(h2ServerPassword))
-  ]
+  h2ServerArgs = {
+    "description": variablize(h2ServerDescription),
+    "owner": variablize(h2ServerOwner),
+    "udp_port_range": variablize(h2ServerUdpPortRange),
+    "tcp_port": variablize(h2ServerTcpPort),
+    "logs_directory": variablize(h2ServerLogsDirectory),
+    "enable_xdelay": variablize(h2ServerEnableXDelay),
+    "server_name": variablize(h2ServerName),
+    "server_playlist": variablize(h2ServerPlaylist),
+    "username": variablize(h2ServerUsername),
+    "password": variablize(h2ServerPassword)
+  }
 
   h2ServerBuild = {"context": "./Dockerfiles", "dockerfile": "Dockerfile", "args": h2ServerArgs}
   return {
@@ -110,7 +100,7 @@ def getH2ServerBlock(id):
         PortKeyValueType(variablize(h2ServerTcpPort), variablize(h2ServerTcpPort) + "/tcp")
       ],
       "volumes": [VolumeKeyValueType(variablize(h2ServerLogsDirectory),
-                                   "/root/.wine/drive_c/users/root/Local Settings/Application Data/Microsoft/Halo 2/logs/H2Server/instance1")],
+                                     "/root/.wine/drive_c/users/root/Local Settings/Application Data/Microsoft/Halo 2/logs/H2Server/instance1")],
       "extends": {"file": "docker-common.yml", "service": "h2server"}
     }
   }
