@@ -22,6 +22,10 @@ ARG server_name
 ARG server_playlist
 ARG username
 ARG password
+ARG stats_auth_key
+ARG vip_lock
+ARG minimum_player_start
+ARG teams_enabled_bit_flags
 
 # Build h2server registry file
 ADD createRegistryFile.sh .
@@ -33,7 +37,7 @@ RUN ./createRegistryFile.sh "$description" "$owner"
 ADD createServerConfig.sh .
 ADD h2serverconfig.ini.template .
 RUN chmod 755 createServerConfig.sh
-RUN ./createServerConfig.sh "$wan_ip" "$lan_ip" "$enable_xdelay" "$debug_log" "$debug_log_level" "$debug_log_console" "$server_name" "$server_playlist" "$pcr_time" "$username" "$password" "$udp_port_range"
+RUN ./createServerConfig.sh "$wan_ip" "$lan_ip" "$enable_xdelay" "$debug_log" "$debug_log_level" "$debug_log_console" "$server_name" "$server_playlist" "$pcr_time" "$username" "$password" "$udp_port_range" "$stats_auth_key" "$vip_lock" "$minimum_player_start" "$teams_enabled_bit_flags"
 RUN mkdir /home/config
 RUN mv h2serverconfig.ini /home/config/
 
