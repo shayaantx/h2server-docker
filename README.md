@@ -10,6 +10,12 @@ This set of docker configurations enables someone to host halo2vista dedicated (
 - Ability to open ports
 - Ability to use linux based distributions
 - Ability to use git
+- Make sure following is installed:
+    - git
+    - docker
+    - docker-compose
+    - python
+    - python-yaml
 
 ## Setup
 

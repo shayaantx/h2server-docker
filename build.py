@@ -77,6 +77,10 @@ def getH2ServerBlock(id):
   h2ServerPlaylist = validateValueAndGetKey(h2ServerUniqueStringPrefix + "SERVER_PLAYLIST")
   h2ServerUsername = validateValueAndGetKey(h2ServerUniqueStringPrefix + "USERNAME")
   h2ServerPassword = validateValueAndGetKey(h2ServerUniqueStringPrefix + "PASSWORD")
+  h2ServerStatsAuthKey = validateValueAndGetKey(h2ServerUniqueStringPrefix + "STATS_AUTH_KEY")
+  h2ServerVipLock = validateValueAndGetKey(h2ServerUniqueStringPrefix + "VIP_LOCK")
+  h2ServerMinimumPlayerStart = validateValueAndGetKey(h2ServerUniqueStringPrefix + "MINIMUM_PLAYER_START")
+  h2ServerTeamsEnabledBitFlags = validateValueAndGetKey(h2ServerUniqueStringPrefix + "TEAMS_ENABLED_BIT_FLAGS")
 
   h2ServerArgs = {
     "description": variablize(h2ServerDescription),
@@ -88,7 +92,11 @@ def getH2ServerBlock(id):
     "server_name": variablize(h2ServerName),
     "server_playlist": variablize(h2ServerPlaylist),
     "username": variablize(h2ServerUsername),
-    "password": variablize(h2ServerPassword)
+    "password": variablize(h2ServerPassword),
+    "stats_auth_key": variablize(h2ServerStatsAuthKey),
+    "vip_lock": variablize(h2ServerVipLock),
+    "minimum_player_start": variablize(h2ServerMinimumPlayerStart),
+    "teams_enabled_bit_flags": variablize(h2ServerTeamsEnabledBitFlags)
   }
 
   h2ServerBuild = {"context": "./Dockerfiles", "dockerfile": "Dockerfile", "args": h2ServerArgs}
