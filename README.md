@@ -68,7 +68,7 @@ This set of docker configurations enables someone to host halo2vista dedicated (
 1. If you want to connect to administer your h2server, follow below steps
     1. docker ps
     1. Get the container id
-    1. docker exec -it <container-id> screen -r
+    1. docker exec -it \<container-id\> screen -r
     1. Don't ctrl+c or type exit, since that will exit the server, always end with Ctrl+a+d (we are running screen here due to some interactive shell annoyance with h2server.exe -live mode)    
 
 ## Other
