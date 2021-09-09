@@ -67,5 +67,8 @@ server_playlist = ${var8}
 additional_pcr_time = ${var9}
 login_identifier = ${var10}
 login_password = ${var11}
-
+stats_auth_key = ${var13}
+vip_lock = ${var14}
+minimum_player_start = ${var15}
+teams_enabled_bit_flags = ${var16}
 
